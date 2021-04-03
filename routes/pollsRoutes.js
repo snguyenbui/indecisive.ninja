@@ -10,6 +10,14 @@ router.post('/', (req, res) => {
 //Results
 router.get('/:id', (req, res) => {
   //query stuff and graph it and do other things
+  getPollInfo(req.params.id)
+    .then(res => {
+      console.log('This is our data!', res);
+    })
+    .catch(err => {
+      console.log('error!', err);
+    });
+
   console.log("this is working");
 });
 
