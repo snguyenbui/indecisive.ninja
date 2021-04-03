@@ -16,7 +16,7 @@ router.get('/:id', (req, res) => {
       console.log('This is our data!', res);
     })
     .catch(err => {
-      console.log('error!', err);
+      console.log('error caught in pollsRoutes', err);
     });
 
   console.log("this is working");
