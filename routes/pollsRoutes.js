@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { getPollInfo } = require('../db/queries/pollsQueries')
 
 //Adding poll
 router.post('/', (req, res) => {
