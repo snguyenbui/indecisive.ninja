@@ -1,3 +1,4 @@
+-- creat table polls
 DROP TABLE IF EXISTS polls CASCADE;
 CREATE TABLE polls (
   id SERIAL PRIMARY KEY NOT NULL,
