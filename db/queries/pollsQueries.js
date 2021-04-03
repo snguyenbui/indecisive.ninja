@@ -1,4 +1,5 @@
-const db = require('../../lib/db');
+const db = require('../../lib/db')
+console.log(db)
 // // Get /polls/:id
 // SELECT polls.id AS poll_id, polls.description, creator_email, created_at, choices.id AS choice_id, choices.option, choices.score
 // FROM polls
