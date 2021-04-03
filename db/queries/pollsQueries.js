@@ -1,8 +1,5 @@
 const db = require('../../lib/db')
-console.log(db)
 
-
-// //
 // //GET /polls/:id/vote
 
 // // Will be same funciton as above
@@ -32,7 +29,7 @@ const getPollInfo = (id) => {
       return res.rows;
     })
     .catch(err => {
-      console.log('error!', err);
+      console.log('error caught in pollQueries', err);
     });
 };
 
