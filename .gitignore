@@ -5,3 +5,4 @@ public/styles
 *.sqlite3
 
 # "local": "node node_modules/nodemon/bin/nodemon.js server.js"
+# "local": "./node_modules/.bin/nodemon -L --ignore public/"
