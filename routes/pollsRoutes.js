@@ -8,6 +8,7 @@ router.post('/', (req, res) => {
 });
 
 //Results
+// Get /polls/:id
 router.get('/:id', (req, res) => {
   //query stuff and graph it and do other things
   getPollInfo(req.params.id)

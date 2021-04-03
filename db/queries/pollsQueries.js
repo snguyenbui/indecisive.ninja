@@ -1,11 +1,6 @@
 const db = require('../../lib/db')
 console.log(db)
-// // Get /polls/:id
-// SELECT polls.id AS poll_id, polls.description, creator_email, created_at, choices.id AS choice_id, choices.option, choices.score
-// FROM polls
-// JOIN choices ON polls.id = choices.poll_id
-// WHERE polls.id = 1
-// ORDER BY choices.score DESC;
+
 
 // //
 // //GET /polls/:id/vote
@@ -24,6 +19,8 @@ console.log(db)
 //   WHERE poll_id = var
 //     AND id = var ;
 
+
+// Get /polls/:id
 const getPollInfo = (id) => {
   return db.query(`SELECT polls.id AS poll_id, polls.description, creator_email, created_at, choices.id AS choice_id, choices.option, choices.score
   FROM polls
