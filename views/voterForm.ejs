@@ -19,47 +19,33 @@
 
 <body>
 
-  <% for (let item of poll) {%>
-    <p>
-      <%= JSON.stringify(item) %>
-    </p>
-    <% } %>
 
 
-      <form id="voterForm" method="POST" action="/polls/:id">
-        <input type="text" placeholder="name" name="voter-name">
-        <h1>Voting</h1>
-        <div class="wrapper">
-          <div class="item div1">
-            <input class="button" name='choice' value="1" placeholder="THIS IS THE FIRST ITEM">
-            <i class="fas fa-bars"></i>
-          </div>
-          <div class="item div2">
-            <input class="button" name='choice' value="2" placeholder="THIS IS THE FIRST ITEM">
-            <i class="fas fa-bars"></i>
-          </div>
-          <div class="item div3">
-            <input class="button" name='choice' value="3" placeholder="THIS IS THE FIRST ITEM">
-            <i class="fas fa-bars"></i>
-          </div>
-          <div class="item div4">
-            <input class="button" name='choice' value="4" placeholder="THIS IS THE FIRST ITEM">
-            <i class="fas fa-bars"></i>
-          </div>
-          <div class="item div5">
-            <input class="button" name='choice' value="5" placeholder="THIS IS THE FIRST ITEM">
-            <i class="fas fa-bars"></i>
-          </div>
+
+  <form id="voterForm" method="POST" action="/polls/:id">
+    <input type="text" placeholder="name" name="voter-name">
+    <h1>Voting</h1>
+
+    <div class="wrapper">
+
+      <% for (let item of poll) {%>
+        <div class="item div1">
+          <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
+          <i class="fas fa-bars"></i>
         </div>
 
-        <input type="submit" name="" id="">
 
-        <script>
-          const dragArea = document.querySelector(".wrapper");
-          new Sortable(dragArea, {
-            animation: 350
-          });
-        </script>
+        <% } %>
+    </div>
+
+    <input type="submit" name="" id="">
+
+    <script>
+      const dragArea = document.querySelector(".wrapper");
+      new Sortable(dragArea, {
+        animation: 350
+      });
+    </script>
 
 
 </body>
