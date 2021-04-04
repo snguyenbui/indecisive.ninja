@@ -27,9 +27,6 @@ const getPollInfo = (id) => {
   `, [id])
     .then(res => {
       return res.rows;
-    })
-    .catch(err => {
-      console.log('error caught in pollQueries', err);
     });
 };
 
