@@ -12,10 +12,20 @@ const db = require('../../lib/db')
 
 // //POST/polls/:id
 
-// UPDATE choices SET score = var
-//   WHERE poll_id = var
-//     AND id = var ;
+const updatePollScore = (new_score, poll_id, choice_id) => {
+  return db.query(`UPDATE choices SET score = $1
+  WHERE poll_id = $2
+    AND id = $3
+    RETURNING *;`, [new_score, poll_id, choice_id])
+    .then(res => {
+      return res.rows;
+    });
+};
 
+updatePollScore(6, 2, 10)
+  .then(res => {
+    console.log(res)
+  });
 
 // Get /polls/:id
 const getPollInfo = (id) => {
@@ -34,5 +44,6 @@ const getPollInfo = (id) => {
 
 
 module.exports = {
-  getPollInfo
+  getPollInfo,
+  updatePollScore
 }

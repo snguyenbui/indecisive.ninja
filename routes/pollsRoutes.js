@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPollInfo } = require('../db/queries/pollsQueries')
+const { getPollInfo, updatePollScore } = require('../db/queries/pollsQueries')
 
 //Adding poll
 router.post('/', (req, res) => {
@@ -28,7 +28,10 @@ router.get('/:id/vote', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  //add vote to database etc etc
+  updatePollScore(6, 2, 10)
+    .then(res => {
+      console.log(res)
+    })
 });
 
 module.exports = router;
