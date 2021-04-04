@@ -22,10 +22,6 @@ const updatePollScore = (new_score, poll_id, choice_id) => {
     });
 };
 
-updatePollScore(6, 2, 10)
-  .then(res => {
-    console.log(res)
-  });
 
 // Get /polls/:id
 const getPollInfo = (id) => {

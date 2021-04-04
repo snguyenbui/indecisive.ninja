@@ -24,14 +24,24 @@ router.get('/:id', (req, res) => {
 
 //Voting
 router.get('/:id/vote', (req, res) => {
+  getPollInfo(req.params.id)
+    .then(pollData => {
+      const templateVars = { 'poll': pollData }
+      console.log('this is the one we are looking for', templateVars)
+      res.render('voterForm', templateVars)
+    })
   //show options on poll
 });
 
 router.post('/:id', (req, res) => {
-  updatePollScore(6, 2, 10)
-    .then(res => {
-      console.log(res)
-    })
+  console.log('req ', req.body)
+
+  //console.log('res ', res)
+
+  // updatePollScore(6, 2, 10)
+  //   .then(res => {
+  //     console.log(res)
+  //   })
 });
 
 module.exports = router;

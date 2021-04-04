@@ -12,29 +12,55 @@
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 
 </head>
 
 <body>
-  <form id="voterForm" method="POST" action="/polls/:id">
-    <h1>Voting</h1>
 
-    <input type="text" placeholder="name" name="voter-name">
+  <% for (let item of poll) {%>
+    <p>
+      <%= JSON.stringify(item) %>
+    </p>
+    <% } %>
 
-    <p class="description">description</p>
 
-    <p>Drag options in desired order</p>
+      <form id="voterForm" method="POST" action="/polls/:id">
+        <input type="text" placeholder="name" name="voter-name">
+        <h1>Voting</h1>
+        <div class="wrapper">
+          <div class="item div1">
+            <input class="button" name='choice' value="1" placeholder="THIS IS THE FIRST ITEM">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="item div2">
+            <input class="button" name='choice' value="2" placeholder="THIS IS THE FIRST ITEM">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="item div3">
+            <input class="button" name='choice' value="3" placeholder="THIS IS THE FIRST ITEM">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="item div4">
+            <input class="button" name='choice' value="4" placeholder="THIS IS THE FIRST ITEM">
+            <i class="fas fa-bars"></i>
+          </div>
+          <div class="item div5">
+            <input class="button" name='choice' value="5" placeholder="THIS IS THE FIRST ITEM">
+            <i class="fas fa-bars"></i>
+          </div>
+        </div>
 
-    <input type='number' name="1">
-    <input type='number' name="2">
-    <input type='number' name="3">
-    <input type='number' name="4">
-    <input type='number' name="5">
-    <input type='hidden' name="poll_id" value="1">
+        <input type="submit" name="" id="">
 
-    <input type="submit" name="" id="">
-  </form>
+        <script>
+          const dragArea = document.querySelector(".wrapper");
+          new Sortable(dragArea, {
+            animation: 350
+          });
+        </script>
+
 
 </body>
 
