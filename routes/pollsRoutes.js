@@ -52,13 +52,23 @@ router.post('/:id', (req, res) => {
       scoreLoop(pollData, req)
         .then(() => {
           updateVoter(req.body['voter-name'], req.body.poll_id)
+
+          console.log('should be poll_id', req.body.poll_id)
+
           getPollInfo(req.body.poll_id)
             .then(newData => {
+
+              console.log('newdata: ', newData)
+
               pusher.trigger("my-channel", "my-event", {
                 'poll': newData
-              });
+              })
+
+              console.log('this is in the pusher trigger')
+
               res.redirect(`/polls/${req.body.poll_id}`);
             })
+
         })
     })
 });

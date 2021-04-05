@@ -1,14 +1,24 @@
 
 
+let pollData = document.getElementById('pollData').innerText;
+pollData = JSON.parse(pollData);
+console.log(pollData)
+
+const labels = [];
+const data = [];
+for (let poll of pollData) {
+  labels.push(poll.option);
+  data.push(poll.score);
+}
+
 
 const CHART = document.getElementById('barChart').getContext('2d');
-console.log(CHART)
 
 const barData = {
-  labels: ['one', 'two', 'three', 'cool'],
+  labels: labels,
   datasets: [{
     label: 'My First Dataset',
-    data: [65, 59, 80, 81],
+    data: data,
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
       'rgba(255, 159, 64, 0.2)',
@@ -32,4 +42,3 @@ let myBarChart = new Chart(CHART, {
   data: barData
 });
 
-console.log(myBarChart)
