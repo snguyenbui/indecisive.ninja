@@ -1,14 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const { getPollInfo, updatePollScore, updateVoter } = require('../db/queries/pollsQueries')
 
 const Pusher = require("pusher");
 const pusher = new Pusher({
-  appId: "1182911",
-  key: "1594e4060713eabf20fb",
-  secret: "affeabb3771147a069e1",
-  cluster: "us3",
-  useTLS: true
+  appId: process.env.PUSHER_APPID,
+  key: process.env.PUSHER_KEY,
+  secret: process.env.PUSHER_SECRET,
+  cluster: process.env.PUSHER_CLUSTER,
+  useTLS: process.env.PUSHER_useTLS
 });
 
 //Adding poll
