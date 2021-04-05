@@ -14,7 +14,6 @@ const pusher = new Pusher({
 
 //Adding poll
 router.post('/', (req, res) => {
-
   //add poll to database and options to options DB
   createPoll(req.body.description, req.body.email)
     .then(newPoll => {
@@ -48,9 +47,11 @@ router.get('/:id/vote', (req, res) => {
 
 router.post('/:id', (req, res) => {
   getPollInfo(req.body.poll_id)
-    .then(pollData => {
+  .then(pollData => {
+      console.log("score loop called")
       scoreLoop(pollData, req)
-        .then(() => {
+      .then(() => {
+          console.log("score loop done")
           updateVoter(req.body['voter-name'], req.body.poll_id)
 
           console.log('should be poll_id', req.body.poll_id)
