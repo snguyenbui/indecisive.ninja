@@ -25,15 +25,15 @@
     <input type="text" name="description">
     <br>
     <label for="options">Options</label>
-    <input type="text" name="options">
-    <br>
-    <input type="text" name="options">
-    <br>
-    <input type="text" name="options">
-    <br>
-    <input type="text" name="options">
-
-    <input type="submit">
+    <div id="option_list">
+      <input type="text" required name="options">
+      <input type="text" required name="options">
+      <input type="text" name="options">
+      <input type="text" name="options">
+    </div>
+      <input type="button" id="add_option" value="+">
+      <input type="button" id="remove_option" value="-">
+      <input type="submit">
   </form>
 </body>
 

@@ -21,12 +21,15 @@ const createPoll = (description, creator_email) => {
 // INSERT INTO choices(option, score, poll_id) VALUES('Hawrelack', 0, 3);
 const addChoice = (optionsArray, poll_id) => {
   let queryString = `INSERT INTO choices (option, poll_id, score) VALUES`;
-
-  for (let optionIndex in optionsArray) {
-    queryString += `($${Number(optionIndex) + 2},$1,0),`
+  const newArray = optionsArray.filter((elem) => {
+    return elem;
+  });
+  for (let optionIndex in newArray) {
+    queryString += `($${Number(optionIndex) + 2},$1,0),`;
   }
   return db.query(
-    queryString.substr(0, queryString.length - 1), [poll_id, ...optionsArray]);
+    queryString.substr(0, queryString.length - 1), [poll_id, ...newArray]
+    );
 }
 
 // addChoice(['cats', 'dogs', 'hamster'], 1);
