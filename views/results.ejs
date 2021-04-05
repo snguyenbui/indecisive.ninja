@@ -13,35 +13,44 @@
 
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.0.2/chart.min.js"
+    integrity="sha512-dnUg2JxjlVoXHVdSMWDYm2Y5xcIrJg1N+juOuRi0yLVkku/g26rwHwysJDAMwahaDfRpr1AxFz43ktuMPr/l1A=="
+    crossorigin="anonymous"></script>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script>
+  <script src="/scripts/pusherScript.js" type="text/javascript"></script>
 
-    const pusher = new Pusher('431d49f7809eb69e6319', {
-      cluster: 'us3'
-    });
-
-    const channel = pusher.subscribe('my-channel');
-    channel.bind('my-event', function(data) {
-      let output = "";
-      console.log(data.poll)
-      for (item of data.poll) {
-        output+=`${item.option} ${item.score} <br>`;
-      }
-      document.getElementById("resultTable").innerHTML = output;
-    });
-  </script>
 
 </head>
 
+
 <body>
+  <p id='pollData' style="display:none">
+    <%=JSON.stringify(poll) %>
+  </p>
+
+  <div class="chart-container">
+    <canvas id="barChart" width="400" height="400"></canvas>
+  </div>
+
+
+  <!-- <div class="chart-container">
+    <canvas id="chart"></canvas>
+  </div> -->
+
+
+
   <p id="resultTable">
     <% for (let item of poll) {%>
       <%= item.option%>
-      <%= item.score %>
-      <br>
-    <% } %>
+        <%= item.score %>
+          <br>
+          <% } %>
   </p>
+
+  <script src="/scripts/chartsScript.js" type="text/javascript"></script>
 
 </body>
 
