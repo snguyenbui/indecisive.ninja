@@ -1,0 +1,15 @@
+.index {
+  display: flex;
+  flex-direction: column;
+  border: black;
+  border-style: solid;
+  border-width: thin;
+}
+
+.wrapper {
+  width: 90%;
+}
+
+table {
+  float: left;
+}
