@@ -2,6 +2,15 @@ const express = require('express');
 const router = express.Router();
 const { getPollInfo, updatePollScore, updateVoter } = require('../db/queries/pollsQueries')
 
+const Pusher = require("pusher");
+const pusher = new Pusher({
+  appId: "1182911",
+  key: "1594e4060713eabf20fb",
+  secret: "affeabb3771147a069e1",
+  cluster: "us3",
+  useTLS: true
+});
+
 //Adding poll
 router.post('/', (req, res) => {
   //add poll to database and options to options DB
@@ -32,12 +41,34 @@ router.get('/:id/vote', (req, res) => {
 router.post('/:id', (req, res) => {
   getPollInfo(req.body.poll_id)
     .then(pollData => {
-      for (choices in pollData) {
-        updatePollScore(pollData[choices].score + (req.body.choice.length - (req.body.choice.indexOf(pollData[choices].option) + 1)), req.body.poll_id, pollData[choices].choice_id);
-      }
-      updateVoter(req.body['voter-name'], req.body.poll_id)
-      res.redirect(`/polls/${req.body.poll_id}`);
+      scoreLoop(pollData, req)
+        .then(() => {
+          updateVoter(req.body['voter-name'], req.body.poll_id)
+          getPollInfo(req.body.poll_id)
+            .then(newData => {
+              pusher.trigger("my-channel", "my-event", {
+                'poll': newData
+              });
+              res.redirect(`/polls/${req.body.poll_id}`);
+            })
+        })
     })
 });
+
+const scoreLoop = (pollData, req) => {
+  const bar = new Promise((resolve, reject) => {
+    let count = 0;
+    for (choices in pollData) {
+      updatePollScore(pollData[choices].score + (req.body.choice.length - (req.body.choice.indexOf(pollData[choices].option) + 1)), req.body.poll_id, pollData[choices].choice_id)
+        .then(() => {
+          count++;
+          if (count === req.body.choice.length) {
+            resolve();
+          }
+        })
+    }
+  })
+  return bar;
+}
 
 module.exports = router;

@@ -14,16 +14,38 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  <script>
+
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    const pusher = new Pusher('1594e4060713eabf20fb', {
+      cluster: 'us3'
+    });
+
+    const channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+      let output = "";
+      console.log(data.poll)
+      for (item of data.poll) {
+        output+=`${item.option} ${item.score} <br>`;
+      }
+      document.getElementById("resultTable").innerHTML = output;
+    });
+  </script>
 
 </head>
 
 <body>
-  <% for (let item of poll) {%>
-    <!-- <%= JSON.stringify(item) %> -->
-    <%= item.option%>
-    <%= item.score %>
-    <br>
-  <% } %>
+  <p id="resultTable">
+    <% for (let item of poll) {%>
+      <%= item.option%>
+      <%= item.score %>
+      <br>
+    <% } %>
+  </p>
+
 </body>
 
 </html>

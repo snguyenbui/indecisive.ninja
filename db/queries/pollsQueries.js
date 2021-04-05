@@ -1,4 +1,4 @@
-const db = require('../../lib/db')
+const db = require('../../lib/db');
 
 // //GET /polls/:id/vote
 
@@ -19,7 +19,7 @@ const updatePollScore = (new_score, poll_id, choice_id) => {
     RETURNING *;`, [new_score, poll_id, choice_id])
     .then(res => {
       return res.rows;
-  });
+    });
 };
 
 
@@ -33,7 +33,7 @@ const getPollInfo = (id) => {
   `, [id])
     .then(res => {
       return res.rows;
-  });
+    });
 };
 
 const updateVoter = (name, pollId) => {
@@ -44,7 +44,7 @@ const updateVoter = (name, pollId) => {
   `, [name, pollId])
     .then(res => {
       return res.rows;
-  });
+    });
 };
 
 
@@ -52,4 +52,4 @@ module.exports = {
   getPollInfo,
   updatePollScore,
   updateVoter
-}
+};

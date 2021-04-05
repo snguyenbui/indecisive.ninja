@@ -3,6 +3,6 @@ $(document).ready(function() {
 
   //makes character counter a live count of text chars in textarea
   $('#voterForm').on('submit', function(e) {
-    console.log(e)
+    console.log(e);
   });
 });
