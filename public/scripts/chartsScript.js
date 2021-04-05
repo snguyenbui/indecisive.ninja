@@ -1,5 +1,4 @@
 
-
 let pollData = document.getElementById('pollData').innerText;
 pollData = JSON.parse(pollData);
 console.log(pollData)
@@ -39,6 +38,9 @@ const barData = {
 
 let myBarChart = new Chart(CHART, {
   type: 'bar',
-  data: barData
+  data: barData,
+  options: {
+    responsive: false
+  }
 });
 
