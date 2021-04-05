@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore, updateVoter } = require('../db/queries/pollsQueries')
+const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice } = require('../db/queries/pollsQueries')
 
 const Pusher = require("pusher");
 const pusher = new Pusher({
@@ -14,7 +14,15 @@ const pusher = new Pusher({
 
 //Adding poll
 router.post('/', (req, res) => {
+
   //add poll to database and options to options DB
+  createPoll(req.body.description, req.body.email)
+    .then(newPoll => {
+      addChoice(req.body.options, newPoll.id).then(() => {
+        res.redirect(`/polls/${newPoll.id}`)
+      })
+    })
+
 });
 
 //Results
@@ -70,5 +78,6 @@ const scoreLoop = (pollData, req) => {
   })
   return bar;
 }
+
 
 module.exports = router;
