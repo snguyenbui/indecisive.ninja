@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore } = require('../db/queries/pollsQueries')
+const { getPollInfo, updatePollScore, updateVoter } = require('../db/queries/pollsQueries')
 
 //Adding poll
 router.post('/', (req, res) => {
@@ -12,14 +12,10 @@ router.post('/', (req, res) => {
 router.get('/:id', (req, res) => {
   //query stuff and graph it and do other things
   getPollInfo(req.params.id)
-    .then(res => {
-      console.log('This is our data!', res);
+    .then(pollData => {
+      const templateVars = { 'poll': pollData }
+      res.render('results', templateVars);
     })
-    .catch(err => {
-      console.log('error caught in pollsRoutes', err);
-    });
-
-  console.log("this is working");
 });
 
 //Voting
@@ -34,14 +30,14 @@ router.get('/:id/vote', (req, res) => {
 });
 
 router.post('/:id', (req, res) => {
-  console.log('req ', req.body)
-
-  //console.log('res ', res)
-
-  // updatePollScore(6, 2, 10)
-  //   .then(res => {
-  //     console.log(res)
-  //   })
+  getPollInfo(req.body.poll_id)
+    .then(pollData => {
+      for (choices in pollData) {
+        updatePollScore(pollData[choices].score + (req.body.choice.length - (req.body.choice.indexOf(pollData[choices].option) + 1)), req.body.poll_id, pollData[choices].choice_id);
+      }
+      updateVoter(req.body['voter-name'], req.body.poll_id)
+      res.redirect(`/polls/${req.body.poll_id}`);
+    })
 });
 
 module.exports = router;

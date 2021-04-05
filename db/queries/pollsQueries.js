@@ -19,7 +19,7 @@ const updatePollScore = (new_score, poll_id, choice_id) => {
     RETURNING *;`, [new_score, poll_id, choice_id])
     .then(res => {
       return res.rows;
-    });
+  });
 };
 
 
@@ -33,13 +33,23 @@ const getPollInfo = (id) => {
   `, [id])
     .then(res => {
       return res.rows;
-    });
+  });
 };
 
-
+const updateVoter = (name, pollId) => {
+  return db.query(`
+  INSERT INTO voters (name, poll_id)
+  VALUES ($1, $2)
+  RETURNING *
+  `, [name, pollId])
+    .then(res => {
+      return res.rows;
+  });
+};
 
 
 module.exports = {
   getPollInfo,
-  updatePollScore
+  updatePollScore,
+  updateVoter
 }
