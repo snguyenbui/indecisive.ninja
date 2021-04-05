@@ -32,7 +32,6 @@ router.get('/:id/vote', (req, res) => {
   getPollInfo(req.params.id)
     .then(pollData => {
       const templateVars = { 'poll': pollData }
-      console.log('this is the one we are looking for', templateVars)
       res.render('voterForm', templateVars)
     })
   //show options on poll
