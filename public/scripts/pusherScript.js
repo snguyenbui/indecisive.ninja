@@ -18,7 +18,7 @@ channel.bind(`my-event-${window.location.href.split('/')[4]}`, function(data) {
 
     var el = document.createElement("div");
     el.setAttribute("style","position:absolute;top:10%;left:80%;background-color:white;");
-    el.innerHTML = `${data.name} just voted`;
+    el.innerHTML = `${data.name}`;
     setTimeout(function(){
       el.parentNode.removeChild(el);
     },3000);
