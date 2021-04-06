@@ -3,16 +3,11 @@ $(document).ready(function() {
 
   //makes character counter a live count of text chars in textarea
   $('#add_option').on('click', function(e) {
-    $('#option_list').append(`<input type="text" name="options">`)
+    $('#option_list').append(`<div class="card">
+    <input type="text" required name="options">
+  </div>`)
   });
 
-  $('#remove_option').on('click', function(e) {
-    console.log("minus clicked")
-    console.log($('#option_list').children().last('input'))
-    if ($('#option_list').children().length > 2) {
-      $('#option_list').children().last('input').remove();
-    }
-  });
 
   $('.link').text(`${document.URL}/vote`)
 });
