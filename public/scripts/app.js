@@ -13,6 +13,7 @@ $(document).ready(function() {
     $('#option_list').append(`<div class="card">
     <input type="text" name="options">
   </div>`)
+    $('#add_option').blur()
   });
 
 
