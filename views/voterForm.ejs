@@ -31,7 +31,9 @@
     <table>
       <tbody>
         <% for (let item of poll) {%>
-          <td class='index'><%= poll.indexOf(item) + 1 %></td>
+          <td class='index'>
+            <%= poll.indexOf(item) + 1 %>
+          </td>
           <% } %>
       </tbody>
     </table>
@@ -42,7 +44,7 @@
           <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
           <i class="fas fa-bars"></i>
         </div>
-      <% } %>
+        <% } %>
     </div>
 
     <input type="submit" name="" id="">
