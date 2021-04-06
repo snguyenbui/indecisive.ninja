@@ -29,8 +29,8 @@ const addChoice = (optionsArray, poll_id) => {
   }
   return db.query(
     queryString.substr(0, queryString.length - 1), [poll_id, ...newArray]
-    );
-}
+  );
+};
 
 // addChoice(['cats', 'dogs', 'hamster'], 1);
 // //POST/polls/:id
