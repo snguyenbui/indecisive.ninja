@@ -54,7 +54,8 @@ router.post('/:id', (req, res) => {
         getPollInfo(req.body.poll_id)
           .then(newData => {
               pusher.trigger("my-channel", `my-event-${req.body.poll_id}`, {
-                'poll': newData
+                'poll': newData,
+                'name': req.body['voter-name']
               })
             res.redirect(`/polls/${req.body.poll_id}`);
           })

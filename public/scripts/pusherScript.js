@@ -14,4 +14,14 @@ channel.bind(`my-event-${window.location.href.split('/')[4]}`, function(data) {
     myBarChart.data.datasets[0].data = barChartData
     myBarChart.data.labels = barChartLabels;
     myBarChart.update();
+
+
+    var el = document.createElement("div");
+    el.setAttribute("style","position:absolute;top:10%;left:80%;background-color:white;");
+    el.innerHTML = `${data.name} just voted`;
+    setTimeout(function(){
+      el.parentNode.removeChild(el);
+    },3000);
+    document.body.appendChild(el);
 });
+
