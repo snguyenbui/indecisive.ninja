@@ -10,13 +10,12 @@ for (let poll of pollData) {
   data.push(poll.score);
 }
 
-
 const CHART = document.getElementById('barChart').getContext('2d');
 
 const barData = {
   labels: labels,
   datasets: [{
-    label: 'My First Dataset',
+    label: pollData[0].description,
     data: data,
     backgroundColor: [
       'rgba(255, 99, 132, 0.2)',
