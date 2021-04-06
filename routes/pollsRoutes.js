@@ -54,9 +54,10 @@ router.post('/:id', (req, res) => {
           updateVoter(body['voter-name'], pollId);
           getPollInfo(pollId)
             .then(newData => {
+              let notification = getRandomSentence().replaceAll("name", body['voter-name']);
               pusher.trigger("my-channel", `my-event-${pollId}`, {
                 'poll': newData,
-                'name': body['voter-name']
+                'name': notification
               });
               res.redirect(`/polls/${pollId}`);
             });
@@ -84,6 +85,20 @@ const scoreLoop = (pollData, req) => {
   });
   return bar;
 };
+
+const getRandomSentence = function () {
+  var index= Math.floor(Math.random() * (sentences.length));
+  return sentences[index];
+}
+
+var sentences= [
+  `name just voted`,
+  `name just shared his opinion`,
+  `Oh wow name, I like your choice`,
+  `Your choice is unique, name`,
+  `Awesome preferencs, name`
+];
+
 
 
 module.exports = router;
