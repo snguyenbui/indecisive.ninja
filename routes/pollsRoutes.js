@@ -48,29 +48,17 @@ router.get('/:id/vote', (req, res) => {
 router.post('/:id', (req, res) => {
   getPollInfo(req.body.poll_id)
   .then(pollData => {
-      console.log("score loop called")
-      scoreLoop(pollData, req)
+    scoreLoop(pollData, req)
       .then(() => {
-          console.log("score loop done")
-          updateVoter(req.body['voter-name'], req.body.poll_id)
-
-          console.log('should be poll_id', req.body.poll_id)
-
-          getPollInfo(req.body.poll_id)
-            .then(newData => {
-
-              console.log('newdata: ', newData)
-
-              pusher.trigger("my-channel", "my-event", {
+        updateVoter(req.body['voter-name'], req.body.poll_id)
+        getPollInfo(req.body.poll_id)
+          .then(newData => {
+              pusher.trigger("my-channel", `my-event-${req.body.poll_id}`, {
                 'poll': newData
               })
-
-              console.log('this is in the pusher trigger')
-
-              res.redirect(`/polls/${req.body.poll_id}`);
-            })
-
-        })
+            res.redirect(`/polls/${req.body.poll_id}`);
+          })
+      })
     })
 });
 

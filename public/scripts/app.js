@@ -13,4 +13,6 @@ $(document).ready(function() {
       $('#option_list').children().last('input').remove();
     }
   });
+
+  $('.link').text(`${document.URL}/vote`)
 });
