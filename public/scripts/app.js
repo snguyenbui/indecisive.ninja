@@ -4,7 +4,7 @@ $(document).ready(function() {
   //makes character counter a live count of text chars in textarea
   $('#add_option').on('click', function(e) {
     $('#option_list').append(`<div class="card">
-    <input type="text" required name="options">
+    <input type="text" name="options">
   </div>`)
   });
 
