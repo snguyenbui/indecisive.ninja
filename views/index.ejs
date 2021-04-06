@@ -32,15 +32,19 @@
         <form action="/polls/" method="POST">
           <div class="form-container">
             <h3>Create a poll</h3>
-
             <label for="email">Email</label>
-            <input type="text" name="email">
-            <br>
+            <div class="card">
+              <input type="text" name="email">
+            </div>
+
             <label for="description">Description</label>
-            <input type="text" name="description">
-            <br>
-            <label for="options">Options</label>
+            <div class="card">
+              <input type="text" name="description">
+            </div>
+
+
             <div id="option_list">
+              <label for="options">Options</label>
 
               <div class="card">
                 <input type="text" required name="options">
