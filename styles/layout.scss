@@ -8,7 +8,7 @@
 
 main {
   min-height: 100vh;
-  background: linear-gradient(to right top, #65dfc9, #6cdbeb);
+  background: linear-gradient(to right top, #aa4b6b, #3b8d99);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -28,7 +28,6 @@ main {
   border-radius: 2rem;
   z-index: 2;
   backdrop-filter: blur(2rem);
-
 
 }
 .home-layout {
@@ -118,11 +117,13 @@ margin: 20px;
    display: flex;
    flex-direction: column;
   align-items: stretch;
-   background: linear-gradient(to left top, rgba(255,255,255,1), rgba(255,255,255,0.8));
+   background: linear-gradient(to left top, rgba(255,255,255,0.2), rgba(255,255,255,0.9));
    border-radius: 1rem;
    margin: 0.3rem 0rem;
+   box-shadow: 6px 6px 20px rgba(122,122,122,0.4);
   input {
     margin-left: 15px;
+    margin-right: 15px;
     height: 2rem;
     border: none;
     background: transparent;
@@ -135,3 +136,18 @@ form{
     margin-bottom: 2rem;
   }
 }
+
+.form-container{
+  .button{
+    float: right;
+    margin-bottom: 0.5rem;
+  }
+  .submit-button{
+    margin-top: 25px;
+    float: right;
+    }
+}
+
+.create-poll-glass{
+  display: none;
+    }
