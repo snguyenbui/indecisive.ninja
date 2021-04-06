@@ -13,28 +13,72 @@
 </head>
 
 <body>
-  <h1>Hello World!!!!</h1>
+  <main>
+    <div class="home-layout">
+      <section class="glass">
+        <div class="dashboard">
+          <img class="header-icon" src="/images/3497643.jpg" alt="">
+          <button>Create A Poll</button>
 
-  <form action="/polls/" method="POST">
-    <h3>Create a poll</h3>
+          <div class="cards">
+            <div class="card">
 
-    <label for="email">Email</label>
-    <input type="text" name="email">
-    <br>
-    <label for="description">Description</label>
-    <input type="text" name="description">
-    <br>
-    <label for="options">Options</label>
-    <div id="option_list">
-      <input type="text" required name="options">
-      <input type="text" required name="options">
-      <input type="text" name="options">
-      <input type="text" name="options">
+            </div>
+          </div>
+
+        </div>
+      </section>
+      <section class="glass">
+        <form action="/polls/" method="POST">
+          <div class="form-container">
+            <h3>Create a poll</h3>
+            <label for="email">Email</label>
+            <div class="card">
+              <input type="text" name="email">
+            </div>
+
+            <label for="description">Description</label>
+            <div class="card">
+              <input type="text" name="description">
+            </div>
+
+
+            <div id="option_list">
+              <label for="options">Options</label>
+
+              <div class="card">
+                <input type="text" required name="options">
+              </div>
+
+              <div class="card">
+                <input type="text" required name="options">
+              </div>
+              <div class="card">
+                <input type="text" name="options">
+              </div>
+              <div class="card">
+                <input type="text" name="options">
+              </div>
+            </div>
+            <input type="button" id="add_option" value="+">
+            <input type="submit">
+        </form>
+
+
     </div>
-      <input type="button" id="add_option" value="+">
-      <input type="button" id="remove_option" value="-">
-      <input type="submit">
-  </form>
+    </section>
+    <div class="how-to-section">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
+    </div>
+
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+  </main>
+
 </body>
 
 </html>
