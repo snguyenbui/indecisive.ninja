@@ -29,7 +29,6 @@ main {
   z-index: 2;
   backdrop-filter: blur(2rem);
 
-
 }
 .home-layout {
   display: flex;
@@ -138,8 +137,6 @@ form{
   }
 }
 
-
-
 .form-container{
   .button{
     float: right;
@@ -149,5 +146,8 @@ form{
     margin-top: 25px;
     float: right;
     }
-
 }
+
+.create-poll-glass{
+  display: none;
+    }
