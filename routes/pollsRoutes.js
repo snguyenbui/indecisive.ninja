@@ -34,7 +34,11 @@ router.get('/:id', (req, res) => {
   getPollInfo(req.params.id)
     .then(pollData => {
       const templateVars = { 'poll': pollData };
-      res.render('results', templateVars);
+      getVotersInfo(req.params.id)
+        .then(voterData => {
+          templateVars.voters = voterData;
+          res.render('results', templateVars);
+        })
     });
 });
 
