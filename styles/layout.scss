@@ -28,6 +28,8 @@ main {
   border-radius: 2rem;
   z-index: 2;
   backdrop-filter: blur(2rem);
+
+
 }
 .home-layout {
   display: flex;
@@ -95,3 +97,35 @@ border-radius: 50%;
 margin-top: 4rem;
 backdrop-filter: blur(2rem);
 }
+
+.form-container{
+display: flex;
+flex-direction: column;
+align-items: left;
+justify-content: space-evenly;
+margin: 20px;
+}
+
+#option_list{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+}
+
+.card {
+   display: flex;
+   flex-direction: column;
+  align-items: stretch;
+   background: linear-gradient(to left top, rgba(255,255,255,1), rgba(255,255,255,0.8));
+   border-radius: 1rem;
+   margin: 0.3rem 0rem;
+  input {
+    margin-left: 5px;
+    height: 2rem;
+    border: none;
+    background: transparent;
+    outline: none;
+  }
+}
+

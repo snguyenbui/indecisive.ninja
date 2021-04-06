@@ -18,14 +18,62 @@
       <section class="glass">
         <div class="dashboard">
           <img class="header-icon" src="/images/3497643.jpg" alt="">
+          <button>Create A Poll</button>
+
+          <div class="cards">
+            <div class="card">
+
+            </div>
+          </div>
 
         </div>
       </section>
-      <div class="how-to-section">
-        <div class="square"></div>
-        <div class="square"></div>
-        <div class="square"></div>
-      </div>
+      <section class="glass">
+        <form action="/polls/" method="POST">
+          <div class="form-container">
+            <h3>Create a poll</h3>
+
+            <label for="email">Email</label>
+            <input type="text" name="email">
+            <br>
+            <label for="description">Description</label>
+            <input type="text" name="description">
+            <br>
+            <label for="options">Options</label>
+            <div id="option_list">
+
+              <div class="card">
+                <input type="text" required name="options">
+              </div>
+
+              <div class="card">
+                <input type="text" required name="options">
+              </div>
+              <div class="card">
+                <input type="text" name="options">
+              </div>
+              <div class="card">
+                <input type="text" name="options">
+              </div>
+            </div>
+            <input type="button" id="add_option" value="+">
+            <input type="submit">
+        </form>
+
+
+        <div class="cards">
+          <div class="card">
+
+          </div>
+        </div>
+
+    </div>
+    </section>
+    <div class="how-to-section">
+      <div class="square"></div>
+      <div class="square"></div>
+      <div class="square"></div>
+    </div>
     </div>
 
     <div class="circle1"></div>
