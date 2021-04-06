@@ -51,7 +51,7 @@ router.get('/:id/vote', (req, res) => {
 router.post('/:id', (req, res) => {
   const body = req.body;
   const pollId = body.poll_id;
-  const ipAddress = req.connection.remoteAddress;
+  const ipAddress = body.hidden_ip;
   getVotersInfo(pollId)
     .then(voterData => {
       if (voterData.length !== 0) {
