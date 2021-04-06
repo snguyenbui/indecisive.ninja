@@ -7,13 +7,13 @@ const db = require('../../lib/db');
 // // POST /polls/
 
 // INSERT INTO polls(description, creator_email) VALUES('Best Edmonton Parks', 'devin@gmail.com');
-const createPoll = (description, creator_email) => {
+const createPoll = (description, creator_email, ipCheck) => {
 
   return db.query(`
-  INSERT INTO polls (description, creator_email)
-  VALUES ($1, $2)
+  INSERT INTO polls (description, creator_email, ip_check)
+  VALUES ($1, $2, $3)
   RETURNING *
-  `, [description, creator_email])
+  `, [description, creator_email, ipCheck])
     .then(res => {
       return res.rows[0];
     });
@@ -59,22 +59,34 @@ const getPollInfo = (id) => {
     });
 };
 
-const updateVoter = (name, pollId) => {
+const updateVoter = (name, pollId, ip_address) => {
   return db.query(`
-  INSERT INTO voters(name, poll_id)
-  VALUES($1, $2)
+  INSERT INTO voters(name, poll_id, ip_address)
+  VALUES($1, $2, $3)
   RETURNING *
-    `, [name, pollId])
+    `, [name, pollId, ip_address])
     .then(res => {
       return res.rows;
     });
 };
 
+const getVotersInfo = (pollId) => {
+  return db.query(`
+  SELECT voters.name, voters.ip_address, polls.ip_check
+  FROM polls
+  JOIN voters ON voters.poll_id = polls.id
+  WHERE polls.id = $1
+  `, [pollId])
+    .then(res => {
+      return res.rows;
+    })
+}
 
 module.exports = {
   getPollInfo,
   updatePollScore,
   updateVoter,
   createPoll,
-  addChoice
+  addChoice,
+  getVotersInfo
 };

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice } = require('../db/queries/pollsQueries');
+const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo } = require('../db/queries/pollsQueries');
 
 const Pusher = require("pusher");
 const pusher = new Pusher({
@@ -15,7 +15,11 @@ const pusher = new Pusher({
 //Adding poll
 router.post('/', (req, res) => {
   //add poll to database and options to options DB
-  createPoll(req.body.description, req.body.email)
+  let ipVerification = false;
+  if (req.body["ip-check"]) {
+    ipVerification = true;
+  }
+  createPoll(req.body.description, req.body.email, ipVerification)
     .then(newPoll => {
       addChoice(req.body.options, newPoll.id).then(() => {
         res.redirect(`/polls/${newPoll.id}`);
@@ -47,19 +51,33 @@ router.get('/:id/vote', (req, res) => {
 router.post('/:id', (req, res) => {
   const body = req.body;
   const pollId = body.poll_id;
-  getPollInfo(pollId)
-    .then(pollData => {
-      scoreLoop(pollData, req)
-        .then(() => {
-          updateVoter(body['voter-name'], pollId);
-          getPollInfo(pollId)
-            .then(newData => {
-              let notification = getRandomSentence().replace("name", body['voter-name']);
-              pusher.trigger("my-channel", `my-event-${pollId}`, {
-                'poll': newData,
-                'name': notification
-              });
-              res.redirect(`/polls/${pollId}`);
+  const ipAddress = req.connection.remoteAddress;
+  getVotersInfo(pollId)
+    .then(voterData => {
+      if (voterData.length !== 0) {
+        if (voterData[0].ip_check) {
+          for (vote of voterData) {
+            if (vote.ip_address === ipAddress) {
+              res.status(400).send("You have already voted");
+              return;
+            }
+          }
+        }
+      }
+      getPollInfo(pollId)
+        .then(pollData => {
+          scoreLoop(pollData, req)
+            .then(() => {
+              updateVoter(body['voter-name'], pollId, ipAddress);
+              getPollInfo(pollId)
+                .then(newData => {
+                  let notification = getRandomSentence().replace("name", body['voter-name']);
+                  pusher.trigger("my-channel", `my-event-${pollId}`, {
+                    'poll': newData,
+                    'name': notification
+                  });
+                  res.redirect(`/polls/${pollId}`);
+                });
             });
         });
     });
@@ -86,7 +104,7 @@ const scoreLoop = (pollData, req) => {
   return bar;
 };
 
-const getRandomSentence = function() {
+const getRandomSentence = function () {
   var index = Math.floor(Math.random() * (sentences.length));
   return sentences[index];
 }
@@ -98,7 +116,5 @@ var sentences = [
   `Your choice is unique, name`,
   `Awesome preferencs, name`
 ];
-
-
 
 module.exports = router;

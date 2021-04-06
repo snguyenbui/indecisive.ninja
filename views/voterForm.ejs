@@ -15,6 +15,7 @@
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
+  <script type="text/javascript" src="/scripts/voteSubmit.js"></script>
 
 </head>
 
@@ -23,7 +24,7 @@
   <form id="voterForm" method="POST" action="/polls/:id">
     <p>
       <input type="text" placeholder="Full name" name="voter-name">
-      <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id">
+      <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
     </p>
     <p>
       <%= poll[0].description %>
