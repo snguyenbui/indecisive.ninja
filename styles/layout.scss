@@ -4,11 +4,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  // color: #3b3b61;
+  color: #0f5d69;
+  font-weight: bold;
 }
+
 
 main {
   min-height: 100vh;
-  background: linear-gradient(to right top, #1F1C18, #8E0E00);
+  background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,8 +27,8 @@ main {
   width: 60%;
   background: linear-gradient(
     to right bottom,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.3)
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.2)
   );
   border-radius: 2rem;
   z-index: 2;
@@ -48,7 +53,7 @@ main {
   background: white;
   background: linear-gradient(
     to right bottom,
-    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.7),
     rgba(255, 255, 255, 0.1)
   );
   height: 13rem;
@@ -94,6 +99,8 @@ width: 13rem;
 border-radius: 50%;
 margin-top: 4rem;
 backdrop-filter: blur(2rem);
+
+
 }
 
 .form-container{
@@ -146,6 +153,7 @@ form{
     padding: 5px;
     margin-top: 25px;
 
+
   }
 
   #add_option{
@@ -169,7 +177,7 @@ form{
 
 
 .submit-button {
-      color: black;
+
       background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.7),
@@ -185,12 +193,14 @@ form{
       transition: 0.25s;
     }
 
-
+#add_option:hover > .fa-plus{
+  color: #eeeeee;
+}
 .up:hover,
 .up:focus {
   border-color: adjust-hue(#aa4b6b, 45deg);
-  color:#c4c4c4;
-  box-shadow: inset 0 -3.25em 0 0 #8E0E00;
+  color:#eeeeee;
+  box-shadow: inset 0 -3.25em 0 0 #3b8d99;
 }
 #add_option:focus {
   margin-top: 2px;
@@ -198,5 +208,44 @@ form{
 }
 .submit-button:focus {
   margin-top: 29px;
-margin-bottom: 4px;
+  margin-bottom: 4px;
 }
+
+
+a.wave-button {
+  position: relative;
+  display: block;
+  padding: 10px 30px;
+  border: 2px solid #00aeff;
+  font-size: 18px;
+  letter-spacing: 4px;
+  color: #00aeff;
+  text-decoration: none;
+}
+
+a.wave-button span {
+  position: relative;
+  z-index: 1;
+  transition: 1s;
+}
+
+a.wave-button .wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #00aeff;
+}
+.checkbox{
+  margin: auto;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 24px;
+  height: 15px;
+  width: 15px;
+  clear: both;
+  outline: none;
+}
+
+
