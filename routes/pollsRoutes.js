@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo } = require('../db/queries/pollsQueries');
+const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo,updateVoterResponses,
+  getVotersResponses } = require('../db/queries/pollsQueries');
 
 const Pusher = require("pusher");
 const pusher = new Pusher({
@@ -19,13 +20,35 @@ router.post('/', (req, res) => {
   if (req.body["ip-check"]) {
     ipVerification = true;
   }
-  createPoll(req.body.description, req.body.email, ipVerification)
+  const randomId = generateRandomString(8);
+  createPoll(req.body.description, req.body.email, ipVerification, randomId)
     .then(newPoll => {
       addChoice(req.body.options, newPoll.id).then(() => {
-        res.redirect(`/polls/${newPoll.id}`);
+        //res.redirect(`/polls/${newPoll.id}`);
+        res.redirect(`/polls/admin/${newPoll.id}/${randomId}`);
       });
     });
 });
+
+const generateRandomString = function(length) {
+  let result = '';
+  let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return result;
+};
+
+router.get('/admin/:pollsId/:id', (req, res) => {
+  console.log(req.params.id);
+  getVotersResponses(req.params.id).then(logs => {
+    console.log(logs);
+    const templateVars = {
+      'logs': logs,
+    };
+    res.render('admin', templateVars);
+  })
+})
 
 //Results
 // Get /polls/:id
@@ -70,9 +93,9 @@ router.post('/:id', (req, res) => {
       }
       getPollInfo(pollId)
         .then(pollData => {
-          scoreLoop(pollData, req)
+          updateVoter(body['voter-name'], pollId, ipAddress).then(newVoter => {
+            scoreLoop(pollData, req, newVoter)
             .then(() => {
-              updateVoter(body['voter-name'], pollId, ipAddress);
               getPollInfo(pollId)
                 .then(newData => {
                   let notification = getRandomSentence().replace("name", body['voter-name']);
@@ -83,11 +106,13 @@ router.post('/:id', (req, res) => {
                   res.redirect(`/polls/${pollId}`);
                 });
             });
+          });
         });
     });
 });
 
-const scoreLoop = (pollData, req) => {
+const scoreLoop = (pollData, req, newVoter) => {
+  console.log('new voter ',newVoter);
   const body = req.body;
   const bar = new Promise((resolve, reject) => {
     let count = 0;
@@ -98,6 +123,7 @@ const scoreLoop = (pollData, req) => {
       const newScore = oldScore + choice.length - (choice.indexOf(userChoice.option) + 1);
       updatePollScore(newScore, body.poll_id, userChoice.choice_id)
         .then(() => {
+          updateVoterResponses(newVoter.id, userChoice.choice_id, choice.length - (choice.indexOf(userChoice.option) + 1))
           count++;
           if (count === choice.length) {
             resolve();

@@ -7,13 +7,13 @@ const db = require('../../lib/db');
 // // POST /polls/
 
 // INSERT INTO polls(description, creator_email) VALUES('Best Edmonton Parks', 'devin@gmail.com');
-const createPoll = (description, creator_email, ipCheck) => {
+const createPoll = (description, creator_email, ipCheck, randomId) => {
 
   return db.query(`
-  INSERT INTO polls (description, creator_email, ip_check)
-  VALUES ($1, $2, $3)
+  INSERT INTO polls (description, creator_email, ip_check, admin_link)
+  VALUES ($1, $2, $3, $4)
   RETURNING *
-  `, [description, creator_email, ipCheck])
+  `, [description, creator_email, ipCheck, randomId])
     .then(res => {
       return res.rows[0];
     });
@@ -66,7 +66,7 @@ const updateVoter = (name, pollId, ip_address) => {
   RETURNING *
     `, [name, pollId, ip_address])
     .then(res => {
-      return res.rows;
+      return res.rows[0];
     });
 };
 
@@ -82,11 +82,39 @@ const getVotersInfo = (pollId) => {
     })
 }
 
+const updateVoterResponses = (voter_id, choice_id, score) => {
+  return db.query(`INSERT INTO voter_responses
+  (voter_id, choice_id, score)
+  VALUES ($1, $2, $3) RETURNING *`,
+  [voter_id, choice_id, score])
+  .then(res => {
+    return res.rows[0];
+  })
+}
+
+const getVotersResponses = (adminLink) => {
+  const query = `SELECT voters.name, choices.option, voter_responses.score FROM voter_responses
+  JOIN voters on voter_responses.voter_id = voters.id
+  JOIN choices on voter_responses.choice_id = choices.id
+  WHERE voters.poll_id = (
+    SELECT id FROM polls WHERE admin_link = $1
+  );`;
+  console.log(query);
+  return db.query(query,
+  [adminLink])
+  .then(res => {
+    return res.rows;
+  })
+}
+
 module.exports = {
   getPollInfo,
   updatePollScore,
   updateVoter,
   createPoll,
   addChoice,
-  getVotersInfo
+  getVotersInfo,
+  updateVoterResponses,
+  getVotersResponses
 };
+

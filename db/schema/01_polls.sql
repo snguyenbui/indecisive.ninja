@@ -4,5 +4,6 @@ CREATE TABLE polls (
   description TEXT NOT NULL,
   creator_email VARCHAR(255) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  ip_check BOOLEAN DEFAULT FALSE
+  ip_check BOOLEAN DEFAULT FALSE,
+  admin_link VARCHAR(8) NOT NULL
 );
