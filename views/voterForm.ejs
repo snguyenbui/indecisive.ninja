@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/voterForm.css" type="text/css" />
 
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
+
   <script src="https://kit.fontawesome.com/e7059793e5.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
@@ -19,17 +22,20 @@
 
 </head>
 <main>
+
   <body>
     <form class="glass" id="voterForm" method="POST" action="/polls/:id">
       <h1 id='description'>
         <%= poll[0].description %>
       </h1>
-      <p>
-        <input type="text" required placeholder="Full name" name="voter-name">
-        <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
-        <input type="hidden" value="" name="hidden_ip" id='hidden_ip'>
-      </p>
-      <p>Sort options by preference</p>
+
+      <div class="name">
+        <input type="text" required placeholder="Name" name="voter-name">
+      </div>
+      <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
+      <input type="hidden" value="" name="hidden_ip" id='hidden_ip'>
+
+      <p class='instruction'>Sort options by preference</p>
       <div class='form'>
         <div class="indices">
           <% for (let item of poll) {%>
@@ -44,10 +50,10 @@
               <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
               <i class="fas fa-bars"></i>
             </div>
-          <% } %>
+            <% } %>
         </div>
       </div>
-      <input type="submit" name="" id="">
+      <input type="submit" name="" class="submit">
       <script>
         const dragArea = document.querySelector(".wrapper");
         new Sortable(dragArea, {

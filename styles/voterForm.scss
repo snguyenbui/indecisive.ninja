@@ -2,6 +2,9 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+
+  color: #0f5d69;
 }
 
 main {
@@ -14,7 +17,7 @@ main {
 }
 
 .glass {
-  min-height: 60vh;
+  min-height: auto;
   width: auto;
   padding: 1rem;
   background: linear-gradient(
@@ -31,6 +34,7 @@ main {
   display: flex;
   flex-direction: row;
   color: black;
+  margin-top: 0.5rem;
 }
 
 .wrapper {
@@ -41,7 +45,11 @@ main {
   input:focus {
     cursor: grabbing;
   };
+  .fa-bars:hover{
+    cursor: grab;
+  }
 }
+
 
 .card {
   display: flex;
@@ -79,4 +87,57 @@ main {
   align-items: center;
   border-top-left-radius: 10rem;
   border-bottom-left-radius: 10rem;
+}
+
+.submit{
+  margin-top: 16px;
+  float: right;
+  margin-right: 15px;
+  outline: none;
+  border: none;
+  float: right;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  padding: 5px;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.3)
+  );
+height: 30px;
+transition: 0.25s;
+}
+
+.submit:hover{
+border-color: adjust-hue(#aa4b6b, 45deg);
+  color:#eeeeee;
+  box-shadow: inset 0 -3.25em 0 0 #3b8d99;
+}
+.submit:focus{
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+.name{
+    display: flex;
+    flex-direction: column;
+   align-items: stretch;
+    background: linear-gradient(to left top, rgba(255,255,255,0.2), rgba(255,255,255,0.9));
+    border-radius: 1rem;
+    width: 50%;
+
+    margin-bottom: 1rem;
+    box-shadow: 6px 6px 20px rgba(122,122,122,0.4);
+   input {
+     margin-left: 15px;
+     margin-right: 15px;
+     height: 2rem;
+     border: none;
+     background: transparent;
+     outline: none;
+   }
+}
+
+form > p{
+  margin-left: 0.5rem;
 }
