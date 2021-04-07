@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS voter_responses CASCADE;
+CREATE TABLE voter_responses (
+  id SERIAL PRIMARY KEY NOT NULL,
+  voter_id INTEGER REFERENCES voters(id) ON DELETE CASCADE,
+  choice_id INTEGER REFERENCES choices(id) ON DELETE CASCADE,
+  score INTEGER NOT NULL
+);

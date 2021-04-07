@@ -27,6 +27,10 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/admin/:id', (req, res) => {
+
+})
+
 //Results
 // Get /polls/:id
 router.get('/:id', (req, res) => {

@@ -1,3 +1,3 @@
 
-INSERT INTO polls (description, creator_email) VALUES ('Best Vancouver Restaurant', 'kapil@gmail.com', 'ABCDEFGH');
-INSERT INTO polls (description, creator_email) VALUES ('Candidate for Canada Prime Minister', 'san@gmail.com', 'PQRSTXYZ');
+INSERT INTO polls (description, creator_email, admin_link) VALUES ('Best Vancouver Restaurant', 'kapil@gmail.com', 'ABCDEFGH');
+INSERT INTO polls (description, creator_email, admin_link) VALUES ('Candidate for Canada Prime Minister', 'san@gmail.com', 'PQRSTXYZ');
