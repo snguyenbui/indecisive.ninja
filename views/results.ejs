@@ -26,6 +26,7 @@
 </head>
 
 <main>
+
   <body>
     <p id='pollData' style="display:none">
       <%=JSON.stringify(poll) %>
@@ -39,13 +40,16 @@
       <p class='link' hidden></p>
       <div class="logs">
         <% for (name of voters) { %>
-          <p><%= name.name %></p>
+          <p>
+            <%= name.name %>
+          </p>
           <% } %>
       </div>
-      </div>
-      <div class="circle1"></div>
-      <div class="circle2"></div>
-      <script src="/scripts/chartsScript.js" type="text/javascript"></script>
-    </body>
-  </main>
+    </div>
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+    <script src="/scripts/chartsScript.js" type="text/javascript"></script>
+  </body>
+</main>
+
 </html>
