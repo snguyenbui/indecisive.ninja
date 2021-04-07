@@ -9,55 +9,53 @@
 
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
   <link rel="stylesheet" href="/styles/voterForm.css" type="text/css" />
 
+  <script src="https://kit.fontawesome.com/e7059793e5.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/voteSubmit.js"></script>
 
 </head>
-
-<body>
-  <h1>Voting</h1>
-  <form id="voterForm" method="POST" action="/polls/:id">
-    <p>
-      <input type="text" required placeholder="Full name" name="voter-name">
-      <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
-      <input type="hidden" value="" name="hidden_ip" id='hidden_ip'>
-    </p>
-    <p>
-      <%= poll[0].description %>
-    </p>
-    <table>
-      <tbody>
-        <% for (let item of poll) {%>
-          <td class='index'>
-            <%= poll.indexOf(item) + 1 %>
-          </td>
-          <% } %>
-      </tbody>
-    </table>
-    <div class="wrapper">
-
-      <% for (let item of poll) {%>
-        <div class="item div1">
-          <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
-          <i class="fas fa-bars"></i>
+<main>
+  <body>
+    <form class="glass" id="voterForm" method="POST" action="/polls/:id">
+      <h1 id='description'>
+        <%= poll[0].description %>
+      </h1>
+      <p>
+        <input type="text" required placeholder="Full name" name="voter-name">
+        <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
+        <input type="hidden" value="" name="hidden_ip" id='hidden_ip'>
+      </p>
+      <p>Sort options by preference</p>
+      <div class='form'>
+        <div class="indices">
+          <% for (let item of poll) {%>
+            <span class='index card'>
+              <%= poll.indexOf(item) + 1 %>
+            </span>
+            <% } %>
         </div>
-        <% } %>
-    </div>
-
-    <input type="submit" name="" id="">
-
-    <script>
-      const dragArea = document.querySelector(".wrapper");
-      new Sortable(dragArea, {
-        animation: 350
-      });
-    </script>
-  </form>
-</body>
+        <div class="wrapper">
+          <% for (let item of poll) {%>
+            <div class="card">
+              <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
+              <i class="fas fa-bars"></i>
+            </div>
+          <% } %>
+        </div>
+      </div>
+      <input type="submit" name="" id="">
+      <script>
+        const dragArea = document.querySelector(".wrapper");
+        new Sortable(dragArea, {
+          animation: 350
+        });
+      </script>
+    </form>
+  </body>
+</main>
 
 </html>
