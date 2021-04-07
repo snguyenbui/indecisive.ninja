@@ -44,6 +44,23 @@ let myBarChart = new Chart(CHART, {
   type: 'bar',
   data: barData,
   options: {
+    plugins: {
+      title: {
+        display: true,
+        text: pollData[0].description,
+        color: 'rgba(255, 255, 255, 1)',
+        font: {
+          size: 15
+        },
+        padding: {
+          bottom: 30
+        }
+      },
+      legend: {
+        display: false
+      }
+
+    },
     responsive: true,
     scales: {
       x: {
