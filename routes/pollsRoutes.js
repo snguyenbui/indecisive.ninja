@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo, updateVoterResponses,
   getVotersResponses } = require('../db/queries/pollsQueries');
-// const sendEmail = require('../lib/mailgun');
+const sendEmail = require('../lib/mailgun');
 const Pusher = require("pusher");
 const pusher = new Pusher({
   appId: process.env.PUSHER_APPID,
@@ -24,9 +24,8 @@ router.post('/', (req, res) => {
   createPoll(req.body.description, req.body.email, ipVerification, randomId)
     .then(newPoll => {
       addChoice(req.body.options, newPoll.id).then(() => {
-        // sendEmail(`/polls/admin/${newPoll.id}/${randomId}`, req.body.email);
+        sendEmail(`/polls/admin/${newPoll.id}/${randomId}`, req.body.email);
         res.redirect(`/polls/${newPoll.id}`);
-        // res.redirect(`/polls/admin/${newPoll.id}/${randomId}`);
       });
     });
 });
@@ -112,7 +111,6 @@ router.post('/:id', (req, res) => {
 });
 
 const scoreLoop = (pollData, req, newVoter) => {
-  console.log('new voter ', newVoter);
   const body = req.body;
   const bar = new Promise((resolve, reject) => {
     let count = 0;
@@ -144,7 +142,8 @@ var sentences = [
   `name just shared their opinion`,
   `Oh wow name, I like your choice`,
   `Your choice is unique, name`,
-  `Awesome preferences, name`
+  `Awesome preferences, name`,
+  `Thats quite the choice, name`
 ];
 
 module.exports = router;
