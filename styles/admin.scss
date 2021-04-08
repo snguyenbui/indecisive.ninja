@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  color: #0f5d69;
+  font-weight: bold;
+}
+
+main {
+  min-height: 100vh;
+  background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass {
+  margin: 1rem;
+  min-height: auto;
+  width: auto;
+  padding: 1rem;
+  background: linear-gradient(
+    to right bottom,
+    rgba(255, 255, 255, 0.5),
+    rgba(255, 255, 255, 0.3)
+  );
+  border-radius: 2rem;
+  z-index: 2;
+  backdrop-filter: blur(2rem);
+}
