@@ -1,7 +1,7 @@
 
 let pollData = document.getElementById('pollData').innerText;
 pollData = JSON.parse(pollData);
-console.log(pollData);
+
 
 const labels = [];
 const data = [];
@@ -85,5 +85,4 @@ let myBarChart = new Chart(CHART, {
   }
 });
 
-console.log(myBarChart);
 
