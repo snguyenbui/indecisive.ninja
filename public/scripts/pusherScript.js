@@ -11,14 +11,15 @@ channel.bind(`my-event-${window.location.href.split('/')[4]}`, function(data) {
     barChartData.push(item.score);
     barChartLabels.push(item.option);
   }
-  myBarChart.data.datasets[0].data = barChartData
+  myBarChart.data.datasets[0].data = barChartData;
   myBarChart.data.labels = barChartLabels;
   myBarChart.update();
 
 
-  var el = document.createElement("div");
-  $('.log-list').append(`<li>${data.name}</li>`)
-  el.setAttribute("style", "position:absolute;top:10%;left:80%;background-color:white;");
+  let el = document.createElement("div");
+  $('.log-list').append(`<li>${data.name}</li>`);
+  el.setAttribute("style", "position:absolute;top:10%;left:60%;");
+  el.classList.add("glass");
   el.innerHTML = `${data.message}`;
   setTimeout(function() {
     el.parentNode.removeChild(el);

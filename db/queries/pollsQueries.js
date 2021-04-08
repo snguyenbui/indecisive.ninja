@@ -1,14 +1,7 @@
 const db = require('../../lib/db');
 
-// //GET /polls/:id/vote
-
-// // Will be same funciton as above
-
-// // POST /polls/
-
 // INSERT INTO polls(description, creator_email) VALUES('Best Edmonton Parks', 'devin@gmail.com');
 const createPoll = (description, creator_email, ipCheck, randomId) => {
-
   return db.query(`
   INSERT INTO polls (description, creator_email, ip_check, admin_link)
   VALUES ($1, $2, $3, $4)
@@ -18,6 +11,7 @@ const createPoll = (description, creator_email, ipCheck, randomId) => {
       return res.rows[0];
     });
 };
+
 // INSERT INTO choices(option, score, poll_id) VALUES('Hawrelack', 0, 3);
 const addChoice = (optionsArray, poll_id) => {
   let queryString = `INSERT INTO choices (option, poll_id, score) VALUES`;
@@ -33,8 +27,6 @@ const addChoice = (optionsArray, poll_id) => {
 };
 
 // addChoice(['cats', 'dogs', 'hamster'], 1);
-// //POST/polls/:id
-
 const updatePollScore = (new_score, poll_id, choice_id) => {
   return db.query(`UPDATE choices SET score = $1
   WHERE poll_id = $2
@@ -44,7 +36,6 @@ const updatePollScore = (new_score, poll_id, choice_id) => {
       return res.rows;
     });
 };
-
 
 // Get /polls/:id
 const getPollInfo = (id) => {
@@ -64,7 +55,7 @@ const updateVoter = (name, pollId, ip_address) => {
   INSERT INTO voters(name, poll_id, ip_address)
   VALUES($1, $2, $3)
   RETURNING *
-    `, [name, pollId, ip_address])
+  `, [name, pollId, ip_address])
     .then(res => {
       return res.rows[0];
     });
@@ -79,18 +70,18 @@ const getVotersInfo = (pollId) => {
   `, [pollId])
     .then(res => {
       return res.rows;
-    })
-}
+    });
+};
 
 const updateVoterResponses = (voter_id, choice_id, score) => {
   return db.query(`INSERT INTO voter_responses
   (voter_id, choice_id, score)
-  VALUES ($1, $2, $3) RETURNING *`,
-  [voter_id, choice_id, score])
-  .then(res => {
-    return res.rows[0];
-  })
-}
+  VALUES ($1, $2, $3) RETURNING *
+  `, [voter_id, choice_id, score])
+    .then(res => {
+      return res.rows[0];
+    });
+};
 
 const getVotersResponses = (adminLink) => {
   const query = `SELECT voters.name, choices.option, voter_responses.score FROM voter_responses
@@ -99,13 +90,12 @@ const getVotersResponses = (adminLink) => {
   WHERE voters.poll_id = (
     SELECT id FROM polls WHERE admin_link = $1
   );`;
-  console.log(query);
   return db.query(query,
-  [adminLink])
-  .then(res => {
-    return res.rows;
-  })
-}
+    [adminLink])
+    .then(res => {
+      return res.rows;
+    });
+};
 
 module.exports = {
   getPollInfo,
