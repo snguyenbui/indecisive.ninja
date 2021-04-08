@@ -8,7 +8,9 @@ function copyToClipboard(textToCopy) {
     let textArea = document.createElement("textarea");
     textArea.value = textToCopy;
     // make the textarea out of viewport
-    textArea.style.display = "none";
+    textArea.style.position = "fixed";
+    textArea.style.left = "-999999px";
+    textArea.style.top = "-999999px";
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();
