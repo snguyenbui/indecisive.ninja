@@ -12,7 +12,7 @@ $('document').ready(() => {
     console.log('this is where we are sending', `${front}/${id}`);
 
     window.location = `${front}${id}`
-  }, 2000)
+  }, 2500)
 
 })
 
