@@ -16,14 +16,14 @@ channel.bind(`my-event-${window.location.href.split('/')[4]}`, function(data) {
   myBarChart.update();
 
 
-  let el = document.createElement("div");
   $('.log-list').append(`<li>${data.name}</li>`);
-  el.setAttribute("style", "position:absolute;top:10%;left:60%;");
+
+  let el = document.createElement("div");
   el.classList.add("glass");
   el.innerHTML = `${data.message}`;
   setTimeout(function() {
     el.parentNode.removeChild(el);
   }, 3000);
-  document.body.appendChild(el);
+  document.querySelector('.notification-popup').appendChild(el);
 });
 
