@@ -22,13 +22,13 @@ router.post('/', (req, res) => {
   }
   const randomId = generateRandomString(8);
   createPoll(req.body.description, req.body.email, ipVerification, randomId)
-  .then(newPoll => {
-    addChoice(req.body.options, newPoll.id).then(() => {
-      // sendEmail(`/polls/admin/${newPoll.id}/${randomId}`, req.body.email);
-      res.redirect(`/polls/${newPoll.id}`);
+    .then(newPoll => {
+      addChoice(req.body.options, newPoll.id).then(() => {
+        // sendEmail(`/polls/admin/${newPoll.id}/${randomId}`, req.body.email);
+        res.redirect(`/polls/${newPoll.id}`);
         // res.redirect(`/polls/admin/${newPoll.id}/${randomId}`);
+      });
     });
-  });
 });
 
 const generateRandomString = function(length) {
@@ -42,34 +42,34 @@ const generateRandomString = function(length) {
 
 router.get('/admin/:pollsId/:id', (req, res) => {
   getVotersResponses(req.params.id)
-  .then(logs => {
-    const templateVars = {
-      'logs': logs,
-    };
-    res.render('admin', templateVars);
-  });
+    .then(logs => {
+      const templateVars = {
+        'logs': logs,
+      };
+      res.render('admin', templateVars);
+    });
 });
 
 //Results
 router.get('/:id', (req, res) => {
   getPollInfo(req.params.id)
-  .then(pollData => {
-    const templateVars = { 'poll': pollData };
-    getVotersInfo(req.params.id)
-    .then(voterData => {
-      templateVars.voters = voterData;
-      res.render('results', templateVars);
+    .then(pollData => {
+      const templateVars = { 'poll': pollData };
+      getVotersInfo(req.params.id)
+        .then(voterData => {
+          templateVars.voters = voterData;
+          res.render('results', templateVars);
+        });
     });
-  });
 });
 
 //Voting
 router.get('/:id/vote', (req, res) => {
   getPollInfo(req.params.id)
-  .then(pollData => {
-    const templateVars = { 'poll': pollData };
-    res.render('voterForm', templateVars);
-  });
+    .then(pollData => {
+      const templateVars = { 'poll': pollData };
+      res.render('voterForm', templateVars);
+    });
 });
 
 router.post('/:id', (req, res) => {
@@ -77,37 +77,38 @@ router.post('/:id', (req, res) => {
   const pollId = body.poll_id;
   const ipAddress = body.hidden_ip;
   getVotersInfo(pollId)
-  .then(voterData => {
-    if (voterData.length !== 0) {
-      if (voterData[0].ip_check) {
-        for (vote of voterData) {
-          if (vote.ip_address === ipAddress) {
-            //ERROR PAGE
-            res.status(400).send("You have already voted");
-            return;
+    .then(voterData => {
+      if (voterData.length !== 0) {
+        if (voterData[0].ip_check) {
+          for (vote of voterData) {
+            if (vote.ip_address === ipAddress) {
+              let templateVars = { pollId }
+              //ERROR PAGE
+              res.status(400).render('voterfraud', templateVars);
+              return;
+            }
           }
         }
       }
-    }
-    getPollInfo(pollId)
-    .then(pollData => {
-      updateVoter(body['voter-name'], pollId, ipAddress).then(newVoter => {
-      scoreLoop(pollData, req, newVoter)
-      .then(() => {
-        getPollInfo(pollId)
-        .then(newData => {
-          let notification = getRandomSentence().replace("name", body['voter-name']);
-          pusher.trigger("my-channel", `my-event-${pollId}`, {
-            'poll': newData,
-            'name': body['voter-name'],
-            'message': notification
+      getPollInfo(pollId)
+        .then(pollData => {
+          updateVoter(body['voter-name'], pollId, ipAddress).then(newVoter => {
+            scoreLoop(pollData, req, newVoter)
+              .then(() => {
+                getPollInfo(pollId)
+                  .then(newData => {
+                    let notification = getRandomSentence().replace("name", body['voter-name']);
+                    pusher.trigger("my-channel", `my-event-${pollId}`, {
+                      'poll': newData,
+                      'name': body['voter-name'],
+                      'message': notification
+                    });
+                    res.redirect(`/polls/${pollId}`);
+                  });
+              });
           });
-          res.redirect(`/polls/${pollId}`);
         });
-      });
-      });
     });
-  });
 });
 
 const scoreLoop = (pollData, req, newVoter) => {
