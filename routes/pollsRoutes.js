@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo, updateVoterResponses,
   getVotersResponses } = require('../db/queries/pollsQueries');
-
+// const sendEmail = require('../lib/mailgun');
 const Pusher = require("pusher");
 const pusher = new Pusher({
   appId: process.env.PUSHER_APPID,
@@ -24,6 +24,7 @@ router.post('/', (req, res) => {
   createPoll(req.body.description, req.body.email, ipVerification, randomId)
   .then(newPoll => {
     addChoice(req.body.options, newPoll.id).then(() => {
+      // sendEmail(`/polls/admin/${newPoll.id}/${randomId}`, req.body.email);
       res.redirect(`/polls/${newPoll.id}`);
         // res.redirect(`/polls/admin/${newPoll.id}/${randomId}`);
     });
