@@ -40,9 +40,6 @@ $(document).ready(function() {
           $('.copy-button').text('Copy Voter Link');
         }, 1000);
       });
-
-
-
   });
 
 });
