@@ -4,7 +4,7 @@ $(document).ready(function() {
   $('.create-poll-button').on('click', (e) => {
     $('.create-poll-glass').slideDown()
 
-    $('html,body').animate({ scrollTop: 500 }, 'slow');
+    $('html,body').animate({ scrollTop: 550 }, 'slow');
 
   })
 

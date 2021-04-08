@@ -15,6 +15,7 @@ main {
   justify-content: center;
 }
 
+
 .glass {
   min-height: auto;
   width: auto;
@@ -58,17 +59,14 @@ text-decoration: underline;
     outline: none;
     border: none;
     border-radius: 5px;
-
-
-border-radius: 5px;
-padding: 5px;
-background: linear-gradient(
+    padding: 5px;
+    background: linear-gradient(
   to right bottom,
   rgba(255, 255, 255, 0.9),
   rgba(255, 255, 255, 0.3)
-);
-height: 30px;
-transition: 0.25s;
+  );
+  height: 30px;
+  transition: 0.25s;
   }
   button:hover{
     border-color: adjust-hue(#aa4b6b, 45deg);
@@ -77,6 +75,9 @@ transition: 0.25s;
     margin-bottom: 2px;
     margin-top: 13px;
     }
+  .copy-button:hover{
+    cursor: context-menu;
+  }
   button:active{
     margin-bottom: 0px;
     margin-top: 17px;
