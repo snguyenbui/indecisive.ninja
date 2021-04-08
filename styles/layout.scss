@@ -13,7 +13,7 @@
 
 main {
   min-height: 100vh;
-  min-width: 100vh;
+  min-width: 100vw;
   background: linear-gradient(to right, #aa4b6b, #6b6b83, #3b8d99);
   display: flex;
   flex-direction: column;
@@ -25,7 +25,7 @@ main {
   margin-top: 2rem;
   background: white;
   min-height: 60vh;
-  width: 65%;
+  width: 60%;
   background: linear-gradient(
     to right bottom,
     rgba(255, 255, 255, 0.6),
@@ -40,13 +40,15 @@ main {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-width: 100vh;
+  width: 100vw;
 }
 
 .how-to-section {
   width: 75%;
   display: flex;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 .square {
@@ -59,7 +61,7 @@ width: 100vh;
     rgba(255, 255, 255, 0.1)
   );
   height: 13rem;
-  width: 20rem;
+  width: 22rem;
   border-radius: 2rem;
   backdrop-filter: blur(2rem);
   z-index: 2;
