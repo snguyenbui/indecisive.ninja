@@ -7,18 +7,44 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/createFormButton.css" type="text/css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/e7059793e5.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
 </head>
 
 <body>
+
+
   <main>
     <div class="home-layout">
       <section class="glass">
         <div class="dashboard">
-          <img class="header-icon" src="/images/3497643.jpg" alt="">
-          <button class="create-poll-button">Create A Poll</button>
+          <h1>The Best Polls You Can Make</h1>
+          <img class="header-icon" src="/images/header.png" alt="">
+          <button class="blobby-button create-poll-button header-icon">Create A Poll <span class="inner">
+              <span class="blobs">
+                <span class="blob"></span>
+                <span class="blob"></span>
+                <span class="blob"></span>
+
+                <span class="blob"></span>
+              </span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+              <defs>
+                <filter id="goo">
+                  <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10"></feGaussianBlur>
+                  <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 21 -7"
+                    result="goo">
+                  </feColorMatrix>
+                  <feBlend in2="goo" in="SourceGraphic" result="mix"></feBlend>
+                </filter>
+              </defs>
+            </svg>
+          </button>
 
           <div class="cards">
             <div class="card">
@@ -64,8 +90,8 @@
               </div>
             </div>
             <div>
-              <input type="checkbox" name="ip-check" value="true">
-              <label for="ip-check">IP Verification</label>
+              <input class='checkbox' type="checkbox" name="ip-check" value="true">
+              <label for="ip-check"> Only Allow Unique Voters </label>
               <input class="up submit-button button" type="submit">
             </div>
 
@@ -76,9 +102,18 @@
     </section>
 
     <div class="how-to-section">
-      <div class="square"></div>
-      <div class="square"></div>
-      <div class="square"></div>
+      <div class="square">
+        <img class="share" src="/images/create.png" alt="">
+        <p>Create new polls</p>
+      </div>
+      <div class="square">
+        <img class="share" src="/images/collaboration.png" alt="">
+        <p>Share with your friends</p>
+      </div>
+      <div class="square">
+        <img class="share" src="/images/results.png" alt="">
+        <p>View your poll results</p>
+      </div>
     </div>
     </div>
 

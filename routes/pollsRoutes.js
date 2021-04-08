@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo,updateVoterResponses,
+const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo, updateVoterResponses,
   getVotersResponses } = require('../db/queries/pollsQueries');
 
 const Pusher = require("pusher");
@@ -95,24 +95,25 @@ router.post('/:id', (req, res) => {
         .then(pollData => {
           updateVoter(body['voter-name'], pollId, ipAddress).then(newVoter => {
             scoreLoop(pollData, req, newVoter)
-            .then(() => {
-              getPollInfo(pollId)
-                .then(newData => {
-                  let notification = getRandomSentence().replace("name", body['voter-name']);
-                  pusher.trigger("my-channel", `my-event-${pollId}`, {
-                    'poll': newData,
-                    'name': notification
+              .then(() => {
+                getPollInfo(pollId)
+                  .then(newData => {
+                    let notification = getRandomSentence().replace("name", body['voter-name']);
+                    pusher.trigger("my-channel", `my-event-${pollId}`, {
+                      'poll': newData,
+                      'name': body['voter-name'],
+                      'message': notification
+                    });
+                    res.redirect(`/polls/${pollId}`);
                   });
-                  res.redirect(`/polls/${pollId}`);
-                });
-            });
+              });
           });
         });
     });
 });
 
 const scoreLoop = (pollData, req, newVoter) => {
-  console.log('new voter ',newVoter);
+  console.log('new voter ', newVoter);
   const body = req.body;
   const bar = new Promise((resolve, reject) => {
     let count = 0;
@@ -134,7 +135,7 @@ const scoreLoop = (pollData, req, newVoter) => {
   return bar;
 };
 
-const getRandomSentence = function () {
+const getRandomSentence = function() {
   var index = Math.floor(Math.random() * (sentences.length));
   return sentences[index];
 }
