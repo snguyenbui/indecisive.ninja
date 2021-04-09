@@ -18,7 +18,7 @@ main {
 
 .glass {
   min-height: auto;
-  width: auto;
+  min-width: 30rem;
   padding: 1rem;
   background: linear-gradient(
     to right bottom,
