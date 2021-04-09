@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/styles/voterForm.css" type="text/css" />
-
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito&family=Poppins&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="/images/favicon.png" />
@@ -20,22 +19,19 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
   <script type="text/javascript" src="/scripts/app.js"></script>
   <script type="text/javascript" src="/scripts/voteSubmit.js"></script>
-
 </head>
-<main>
 
+<main>
   <body>
     <form class="glass" id="voterForm" method="POST" action="/polls/:id">
       <h1 id='description'>
         <%= poll[0].description %>
       </h1>
-
       <div class="name">
         <input type="text" required placeholder="Name" name="voter-name">
       </div>
       <input type="hidden" value="<%= poll[0].poll_id %>" name="poll_id" id='poll_id'>
       <input type="hidden" value="" name="hidden_ip" id='hidden_ip'>
-
       <p class='instruction'>Rank options by preference</p>
       <div class='form'>
         <div class="indices">
@@ -43,7 +39,7 @@
             <span class='index card'>
               <%= poll.indexOf(item) + 1 %>
             </span>
-            <% } %>
+          <% } %>
         </div>
         <div class="wrapper">
           <% for (let item of poll) {%>
@@ -51,7 +47,7 @@
               <input class="button" name='choice' readonly value="<%= item.option %>" placeholder="<%= item.option %>">
               <i class="fas fa-bars"></i>
             </div>
-            <% } %>
+          <% } %>
         </div>
       </div>
       <input type="submit" value="Submit" class="submit">

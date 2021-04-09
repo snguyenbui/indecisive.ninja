@@ -1,8 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo, updateVoterResponses,
-  getVotersResponses } = require('../db/queries/pollsQueries');
+const { getPollInfo, updatePollScore, updateVoter, createPoll, addChoice, getVotersInfo, updateVoterResponses, getVotersResponses } = require('../db/queries/pollsQueries');
 const sendEmail = require('../lib/mailgun');
 const Pusher = require("pusher");
 const pusher = new Pusher({
