@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
   let url = document.URL;
   let front = url.split("admin")[0];
