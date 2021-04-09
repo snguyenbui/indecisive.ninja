@@ -3,14 +3,41 @@ let pollData = document.getElementById('pollData').innerText;
 pollData = JSON.parse(pollData);
 
 
+// checks length of option for grid ticks, if over 10 charaters, breaks to new line
+const strToArray = (str, limit) => {
+  const words = str.split(' ')
+  let aux = []
+  let concat = []
+  for (let i = 0; i < words.length; i++) {
+    concat.push(words[i])
+    let join = concat.join(' ')
+    if (join.length > limit) {
+      aux.push(join)
+      concat = []
+    }
+  }
+  if (concat.length) {
+    aux.push(concat.join(' ').trim())
+  }
+  return aux
+}
+
+
+let maxLength = 5;
 const labels = [];
 const data = [];
 for (let poll of pollData) {
-  labels.push(poll.option);
+  labels.push(strToArray(poll.option, 10));
   data.push(poll.score);
 }
 
+
+
 const CHART = document.getElementById('barChart').getContext('2d');
+if (maxLength < pollData.length) {
+  // document.getElementById('barChart').style.width = '600px';
+  $('.chart-container').width("700px")
+}
 
 const barData = {
   labels: labels,
@@ -62,6 +89,7 @@ let myBarChart = new Chart(CHART, {
 
     },
     responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {
         grid: {
