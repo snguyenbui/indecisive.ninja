@@ -32,7 +32,7 @@ _____
 
 ## <ins> View Demo Below </ins>
 
-### <ins> Home Page </ins>
+### <ins> Create New Polls - Home Page </ins>
 <img src='./resources/gifs/createpolldemo.gif' width="500">
 
 ### <ins> Vote on polls </ins>
