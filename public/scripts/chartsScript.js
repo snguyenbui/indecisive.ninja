@@ -1,7 +1,5 @@
-
 let pollData = document.getElementById('pollData').innerText;
 pollData = JSON.parse(pollData);
-
 
 // checks length of option for grid ticks, if over 10 charaters, breaks to new line
 const strToArray = (str, limit) => {
@@ -22,7 +20,6 @@ const strToArray = (str, limit) => {
   return aux
 }
 
-
 let maxLength = 5;
 const labels = [];
 const data = [];
@@ -30,8 +27,6 @@ for (let poll of pollData) {
   labels.push(strToArray(poll.option, 10));
   data.push(poll.score);
 }
-
-
 
 const CHART = document.getElementById('barChart').getContext('2d');
 if (maxLength < pollData.length) {
@@ -65,7 +60,6 @@ const barData = {
     borderWidth: 1
   }]
 };
-
 
 let myBarChart = new Chart(CHART, {
   type: 'bar',
@@ -112,5 +106,3 @@ let myBarChart = new Chart(CHART, {
     }
   }
 });
-
-

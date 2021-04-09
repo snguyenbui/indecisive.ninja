@@ -15,7 +15,6 @@ channel.bind(`my-event-${window.location.href.split('/')[4]}`, function(data) {
   myBarChart.data.labels = barChartLabels;
   myBarChart.update();
 
-
   $('.log-list').append(`<li>${data.name}</li>`);
 
   let el = document.createElement("div");

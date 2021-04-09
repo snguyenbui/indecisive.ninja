@@ -22,11 +22,7 @@ function copyToClipboard(textToCopy) {
   }
 }
 
-
-
 $(document).ready(function() {
-
-
   $('.log-button').on('click', (e) => {
     $('.logs').toggle(300);
   });
@@ -35,12 +31,10 @@ $(document).ready(function() {
     copyToClipboard(`${document.URL}/vote`)
       .then(() => {
         $('.copy-button').text('Voter link copied!');
-
         setTimeout(function() {
           $('.copy-button').text('Copy Voter Link');
         }, 1000);
       });
   });
-
 });
 
