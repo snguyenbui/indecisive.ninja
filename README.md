@@ -54,6 +54,10 @@ git clone git@github.com:snguyenbui/midterm-decision-maker.git
 cd indecisive.ninja
 npm install
 ```
+For Windows Users run this install command instead
+```
+npm install --no-bin-links
+```
 3. Set up a local PostgreSQL Database and add credentials to a .env, following the framework of example.env
     * Sign up for a free [Pusher](https://pusher.com/docs/channels/getting_started/javascript) API key
     * Sign up for a free [sendGrid](https://sendgrid.com/) API key
