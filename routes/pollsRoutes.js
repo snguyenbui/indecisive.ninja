@@ -53,6 +53,10 @@ router.get('/admin/:pollsId/:id', (req, res) => {
 router.get('/:id', (req, res) => {
   getPollInfo(req.params.id)
     .then(pollData => {
+      if (pollData.length === 0) {
+        res.render('404')
+        return;
+      }
       const templateVars = { 'poll': pollData };
       getVotersInfo(req.params.id)
         .then(voterData => {
@@ -66,6 +70,10 @@ router.get('/:id', (req, res) => {
 router.get('/:id/vote', (req, res) => {
   getPollInfo(req.params.id)
     .then(pollData => {
+      if (pollData.length === 0) {
+        res.render('404')
+        return;
+      }
       const templateVars = { 'poll': pollData };
       res.render('voterForm', templateVars);
     });
